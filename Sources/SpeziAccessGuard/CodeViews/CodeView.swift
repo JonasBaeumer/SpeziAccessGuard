@@ -53,20 +53,7 @@ struct CodeView: View {
                     focused = true
                 }
                 .onChange(of: code) {
-                    let filtered = codeFormat.filteringInvalidCharacters(from: code)
-                    if filtered != code {
-                        code = filtered
-                        invalidCharacterMessage = codeFormat.invalidCharacterMessage
-                        Task { @MainActor in
-                            try? await Task.sleep(for: .seconds(2))
-                            invalidCharacterMessage = nil
-                        }
-                    }
-                    if codeFormat.validate(code: code) {
-                        Task { @MainActor in
-                            await checkCode()
-                        }
-                    }
+                    codeDidChange()
                 }
             if let invalidCharacterMessage {
                 ErrorMessageCapsule(errorMessage: invalidCharacterMessage)
@@ -81,6 +68,23 @@ struct CodeView: View {
         self.action = action
     }
     
+    private func codeDidChange() {
+        let filtered = codeFormat.filteringInvalidCharacters(from: code)
+        if filtered != code {
+            code = filtered
+            invalidCharacterMessage = codeFormat.invalidCharacterMessage
+            Task { @MainActor in
+                try? await Task.sleep(for: .seconds(2))
+                invalidCharacterMessage = nil
+            }
+        }
+        if codeFormat.validate(code: code) {
+            Task { @MainActor in
+                await checkCode()
+            }
+        }
+    }
+
     private func checkCode() async {
         focused = false
         viewState = .processing
