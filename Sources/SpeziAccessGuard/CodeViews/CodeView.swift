@@ -77,6 +77,7 @@ struct CodeView: View {
             dismissTask?.cancel()
             dismissTask = Task { @MainActor in
                 try? await Task.sleep(for: .seconds(2))
+                guard !Task.isCancelled else { return }
                 invalidCharacterMessage = nil
             }
         }
