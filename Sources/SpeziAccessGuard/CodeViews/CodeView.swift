@@ -17,6 +17,7 @@ struct CodeView: View {
     @FocusState private var focused: Bool
     @State private var viewState: ViewState = .idle
     @State private var invalidCharacterMessage: LocalizedStringResource?
+    @State private var dismissTask: Task<Void, Never>?
     
     var body: some View {
         VStack(spacing: 8) {
@@ -73,7 +74,8 @@ struct CodeView: View {
         if filtered != code {
             code = filtered
             invalidCharacterMessage = codeFormat.invalidCharacterMessage
-            Task { @MainActor in
+            dismissTask?.cancel()
+            dismissTask = Task { @MainActor in
                 try? await Task.sleep(for: .seconds(2))
                 invalidCharacterMessage = nil
             }
