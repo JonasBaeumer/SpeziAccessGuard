@@ -251,7 +251,7 @@
 
     },
     "PASSCODE_ONLY_DIGITS_ALLOWED" : {
-      "extractionState" : "automatic",
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -268,7 +268,7 @@
       }
     },
     "PASSCODE_ONLY_LETTERS_AND_DIGITS_ALLOWED" : {
-      "extractionState" : "automatic",
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
