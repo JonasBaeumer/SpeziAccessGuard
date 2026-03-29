@@ -50,7 +50,7 @@ struct CodeView: View {
                         focused = true
                     }
                 }
-                .task {
+                .onAppear {
                     focused = true
                 }
                 .onChange(of: code) {
@@ -80,8 +80,9 @@ struct CodeView: View {
                 guard !Task.isCancelled else { return }
                 invalidCharacterMessage = nil
             }
+            return
         }
-        if codeFormat.validate(code: code) {
+        if codeFormat.validate(code: filtered) {
             Task { @MainActor in
                 await checkCode()
             }
