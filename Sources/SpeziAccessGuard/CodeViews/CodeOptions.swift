@@ -97,9 +97,9 @@ extension PasscodeFormat {
     var invalidCharacterMessage: LocalizedStringResource? {
         switch self {
         case .numeric:
-            LocalizedStringResource("PASSCODE_ONLY_DIGITS_ALLOWED", bundle: .atURL(from: .module))
+            LocalizedStringResource("PASSCODE_ONLY_DIGITS_ALLOWED", bundle: .module)
         case .alphanumeric:
-            LocalizedStringResource("PASSCODE_ONLY_LETTERS_AND_DIGITS_ALLOWED", bundle: .atURL(from: .module))
+            LocalizedStringResource("PASSCODE_ONLY_LETTERS_AND_DIGITS_ALLOWED", bundle: .module)
         }
     }
 }
