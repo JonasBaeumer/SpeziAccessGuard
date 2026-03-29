@@ -58,6 +58,7 @@ struct CodeView: View {
                 }
             if let invalidCharacterMessage {
                 ErrorMessageCapsule(errorMessage: invalidCharacterMessage)
+                    .accessibilityIdentifier("invalidCharacterMessage")
                     .transition(.opacity)
             }
         }
